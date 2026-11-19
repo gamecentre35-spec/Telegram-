@@ -4,75 +4,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prompt Group</title>
+<title>Sanwar Group</title>
+
 <style>
-  :root { --tg-bg:#101721; --tg-bubble:#1E2837; --tg-text:#E7ECF2; --tg-muted:#8593A6; --tg-accent:#3390EC; --tg-border:#2D394A; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--tg-bg); color:var(--tg-text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; min-height:100vh; }
-  
-  header { background:#17202D; padding:14px 16px; border-bottom:1px solid var(--tg-border); position:sticky; top:0; z-index:10; display:flex; flex-direction:column; gap:10px; }
-  .header-top { display:flex; align-items:center; gap:12px; }
-  .avatar { width:40px; height:40px; border-radius:50%; background:var(--tg-accent); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; }
-  header h1 { font-size:16px; font-weight:600; }
-  header p { font-size:12px; color:var(--tg-muted); margin-top:2px; }
-  
-  /* Search Bar CSS */
-  .search-container { position:relative; width:100%; }
-  .search-container input {
-    width:100%; padding:10px 16px 10px 36px; border-radius:20px; border:none;
-    background:#101721; color:var(--tg-text); font-size:14px; outline:none;
-  }
-  .search-container input::placeholder { color:var(--tg-muted); }
-  .search-container svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; fill:var(--tg-muted); }
+:root {
+  --tg-bg:#101721;
+  --tg-bubble:#1E2837;
+  --tg-text:#E7ECF2;
+  --tg-muted:#8593A6;
+  --tg-accent:#3390EC;
+  --tg-purple:#9333EA;
+  --tg-red:#EF4444;
+  --tg-border:#2D394A;
+}
 
-  #feed { padding:16px; max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
-  .bubble { background:var(--tg-bubble); border-radius:12px; padding:12px 14px; max-width:95%; word-wrap:break-word; overflow-wrap:anywhere; }
-  .bubble .meta { font-size:11px; color:var(--tg-muted); margin-bottom:6px; display:flex; justify-content:space-between; gap:8px; }
-  .bubble .title { font-weight:600; font-size:14px; margin-bottom:6px; color:var(--tg-accent); }
-  .bubble .content { font-size:14px; line-height:1.5; white-space:pre-wrap; }
-  
-  /* Link Button CSS */
-  .link-btn {
-    display:inline-block; margin-top:8px; padding:8px 12px; background:rgba(51, 144, 236, 0.15);
-    border:1px solid var(--tg-accent); color:var(--tg-accent); text-decoration:none;
-    border-radius:6px; font-weight:600; font-size:13px; word-break:break-all;
-  }
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  /* Code Box with Copy Button CSS */
-  .code-container { margin-top:10px; border-radius:8px; overflow:hidden; border:1px solid #334155; background:#0f172a; }
-  .code-header { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:#1e293b; border-bottom:1px solid #334155; }
-  .code-header span { font-size:12px; color:#94a3b8; font-family:monospace; }
-  .copy-code-btn { background:transparent; border:none; color:#94a3b8; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:4px; }
-  .copy-code-btn:hover { color:white; }
-  .code-content { padding:12px; overflow-x:auto; font-family:monospace; font-size:13px; color:#e2e8f0; white-space:pre; }
-  
-  /* Main Copy Prompt Button */
-  .copy-main-btn { margin-top:12px; background:var(--tg-accent); color:white; border:none; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
-  .copy-main-btn:active { opacity:0.8; }
-  .copied { background:#2e7d32 !important; }
-  
-  .bubble img { max-width:100%; border-radius:8px; margin-top:8px; display:block; }
-  #status { text-align:center; color:var(--tg-muted); padding:40px 16px; font-size:14px; }
+body {
+  background:var(--tg-bg);
+  color:var(--tg-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  min-height:100vh;
+}
+
+header {
+  background:#17202D;
+  padding:14px 16px;
+  border-bottom:1px solid var(--tg-border);
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.header-top {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar {
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--tg-accent),var(--tg-purple),var(--tg-red));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:18px;
+}
+
+header h1 {
+  font-size:16px;
+  font-weight:600;
+  background:linear-gradient(90deg,var(--tg-accent),var(--tg-purple),var(--tg-red));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+header p {
+  font-size:12px;
+  color:var(--tg-muted);
+  margin-top:2px;
+}
+
+.search-container {
+  position:relative;
+  width:100%;
+}
+
+.search-container input {
+  width:100%;
+  padding:10px 16px 10px 36px;
+  border-radius:20px;
+  border:1px solid var(--tg-border);
+  background:#101721;
+  color:var(--tg-text);
+  font-size:14px;
+  outline:none;
+}
+
+.search-container input:focus {
+  border-color:var(--tg-purple);
+  box-shadow:0 0 0 2px rgba(147,51,234,.15);
+}
+
+.search-container input::placeholder {
+  color:var(--tg-muted);
+}
+
+.search-container svg {
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  fill:var(--tg-muted);
+}
+
+#feed {
+  padding:16px;
+  max-width:720px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.bubble {
+  background:var(--tg-bubble);
+  border-radius:12px;
+  padding:12px 14px;
+  max-width:95%;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+  cursor:pointer;
+  transition:background .2s,border-color .2s;
+  position:relative;
+  border:1px solid transparent;
+}
+
+.bubble:hover {
+  background:#253245;
+  border-color:rgba(147,51,234,.35);
+}
+
+.bubble .meta {
+  font-size:11px;
+  color:var(--tg-muted);
+  margin-bottom:6px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.meta-right {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.views-badge {
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-weight:500;
+  color:#B0BEC5;
+  background:rgba(0,0,0,.2);
+  padding:2px 6px;
+  border-radius:10px;
+}
+
+.views-badge svg {
+  width:12px;
+  height:12px;
+  fill:currentColor;
+}
+
+.bubble .title {
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:6px;
+  background:linear-gradient(90deg,var(--tg-accent),var(--tg-purple),var(--tg-red));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.bubble .content {
+  font-size:14px;
+  line-height:1.5;
+  white-space:pre-wrap;
+}
+
+.link-btn {
+  display:inline-block;
+  margin-top:8px;
+  padding:8px 12px;
+  background:rgba(51,144,236,.15);
+  border:1px solid var(--tg-accent);
+  color:var(--tg-accent);
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:600;
+  font-size:13px;
+  word-break:break-all;
+}
+
+.link-btn:hover {
+  background:rgba(147,51,234,.2);
+  border-color:var(--tg-purple);
+  color:#C084FC;
+}
+
+.code-container {
+  margin-top:10px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid #334155;
+  background:#0f172a;
+}
+
+.code-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 12px;
+  background:#1e293b;
+  border-bottom:1px solid #334155;
+}
+
+.code-header span {
+  font-size:12px;
+  color:#94a3b8;
+  font-family:monospace;
+}
+
+.copy-code-btn {
+  background:transparent;
+  border:none;
+  color:#C084FC;
+  font-size:12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.copy-code-btn:hover {
+  color:#F87171;
+}
+
+.code-content {
+  padding:12px;
+  overflow-x:auto;
+  font-family:monospace;
+  font-size:13px;
+  color:#e2e8f0;
+  white-space:pre;
+}
+
+.copied {
+  background:linear-gradient(90deg,var(--tg-purple),var(--tg-red)) !important;
+  color:white !important;
+  padding:5px 8px;
+  border-radius:5px;
+}
+
+.bubble img {
+  max-width:100%;
+  border-radius:8px;
+  margin-top:8px;
+  display:block;
+}
+
+#status {
+  text-align:center;
+  color:var(--tg-muted);
+  padding:40px 16px;
+  font-size:14px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="header-top">
-    <div class="avatar">P</div>
-    <div><h1>Prompt Group</h1><p>Read-only · Public</p></div>
+    <div class="avatar">F</div>
+    <div>
+      <h1>Sanwar Group</h1>
+      <p>Read-only · Public</p>
+    </div>
   </div>
+
   <div class="search-container">
-    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    </svg>
     <input type="text" id="searchInput" placeholder="Search prompts, text or links...">
   </div>
 </header>
 
-<div id="feed"><div id="status">Loading posts…</div></div>
+<div id="feed">
+  <div id="status">Loading posts…</div>
+</div>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  runTransaction
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBe4FGAYsgFq5UXL-nqiomOHA6X3Jh7IKg",
@@ -87,132 +324,273 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const postsRef = ref(db, 'posts');
+
+const postsRef = ref(db,'posts');
 
 const feed = document.getElementById("feed");
 const status = document.getElementById("status");
 const searchInput = document.getElementById("searchInput");
 
-let allPosts = []; // Saara data yahan store hoga search ke liye
+let allPosts = [];
+let viewedPostsThisSession = new Set();
 
-onValue(postsRef, (snapshot) => {
-  if (status) status.remove();
+onValue(postsRef,(snapshot)=>{
+
+  if(status) status.remove();
+
   allPosts = [];
-  
-  if (!snapshot.exists()) {
-    feed.innerHTML = '<div style="text-align:center;color:#8593A6;padding:40px">Abhi koi post nahi hai.</div>';
+
+  if(!snapshot.exists()){
+    feed.innerHTML = '<div id="status">Abhi koi post nahi hai.</div>';
     return;
   }
 
-  snapshot.forEach((childSnapshot) => {
-    allPosts.push({ id: childSnapshot.key, ...childSnapshot.val() });
+  snapshot.forEach((childSnapshot)=>{
+    allPosts.push({
+      id:childSnapshot.key,
+      ...childSnapshot.val()
+    });
   });
 
-  // Sort by timestamp descending
-  allPosts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-  
-  renderPosts(allPosts);
-}, (error) => {
+  // Latest post first
+  allPosts.sort((a,b)=>(b.timestamp || 0)-(a.timestamp || 0));
+
+  renderPosts(getFilteredPosts());
+
+},(error)=>{
+
   console.error(error);
-  if (status) status.textContent = "Posts load nahi ho sake. Database rules check karein.";
+  feed.innerHTML = '<div id="status">Posts load nahi ho sake. Database rules check karein.</div>';
+
 });
 
-// Search Functionality
-searchInput.addEventListener("input", (e) => {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredPosts = allPosts.filter(post => {
+// View count update
+async function updateViewCount(postId,bubbleElement){
+
+  if(viewedPostsThisSession.has(postId)) return;
+
+  viewedPostsThisSession.add(postId);
+
+  const viewSpan = bubbleElement.querySelector('.view-count');
+
+  if(viewSpan){
+    viewSpan.innerText = (parseInt(viewSpan.innerText)||0)+1;
+  }
+
+  const postViewRef = ref(db,`posts/${postId}/views`);
+
+  try{
+
+    const result = await runTransaction(postViewRef,(current)=>{
+      return (current || 0)+1;
+    });
+
+    if(!result.committed){
+      throw new Error("View update not committed");
+    }
+
+  }catch(error){
+
+    console.error("View count update failed:",error);
+
+    viewedPostsThisSession.delete(postId);
+
+    if(viewSpan){
+      viewSpan.innerText = Math.max(0,(parseInt(viewSpan.innerText)||1)-1);
+    }
+
+  }
+}
+
+// Search
+searchInput.addEventListener("input",()=>{
+  renderPosts(getFilteredPosts());
+});
+
+function getFilteredPosts(){
+
+  const searchTerm = searchInput.value.toLowerCase().trim();
+
+  return allPosts.filter(post=>{
+
     return (
-      (post.title && post.title.toLowerCase().includes(searchTerm)) ||
-      (post.content && post.content.toLowerCase().includes(searchTerm)) ||
-      (post.url && post.url.toLowerCase().includes(searchTerm))
+      (post.title || "").toLowerCase().includes(searchTerm) ||
+      (post.content || "").toLowerCase().includes(searchTerm) ||
+      (post.url || "").toLowerCase().includes(searchTerm)
     );
-  });
-  renderPosts(filteredPosts);
-});
 
-function renderPosts(postsToRender) {
+  });
+
+}
+
+// Render posts
+function renderPosts(postsToRender){
+
   feed.innerHTML = "";
-  if (postsToRender.length === 0) {
+
+  if(postsToRender.length === 0){
     feed.innerHTML = '<div style="text-align:center;color:#8593A6;padding:40px">Koi post nahi mila.</div>';
     return;
   }
-  postsToRender.forEach((post) => {
-    feed.appendChild(renderPost(post));
+
+  postsToRender.forEach(post=>{
+
+    const postElement = renderPost(post);
+
+    feed.appendChild(postElement);
+
+    postElement.addEventListener('click',(e)=>{
+
+      if(
+        e.target.closest('.copy-code-btn') ||
+        e.target.closest('.link-btn')
+      ) return;
+
+      updateViewCount(post.id,postElement);
+
+    });
+
   });
+
 }
 
-function renderPost(post) {
+// Create post
+function renderPost(post){
+
   const div = document.createElement("div");
   div.className = "bubble";
-  
-  const time = post.timestamp ? new Date(post.timestamp).toLocaleString() : "Just now";
-  let html = `<div class="meta"><span>${post.type || "Text"}</span><span>${time}</span></div>`;
-  
-  if (post.title) html += `<div class="title">${escapeHtml(post.title)}</div>`;
-  
-  // Link Display
-  if (post.type === "Link" && post.url) {
-    html += `<div class="content">${escapeHtml(post.content || "")}</div>
-             <a href="${escapeHtml(post.url)}" target="_blank" rel="noopener" class="link-btn">🔗 Open Link: ${escapeHtml(post.url)}</a>`;
-  } 
-  // Prompt / Code Display
-  else if (post.type === "Prompt") {
-    // Prompt ko Code box mein dikhane ke liye
+
+  const time = post.timestamp
+    ? new Date(post.timestamp).toLocaleString([],{
+        hour:'2-digit',
+        minute:'2-digit'
+      })
+    : "Just now";
+
+  const viewCount = post.views || 0;
+
+  const eyeIcon = `
+  <svg viewBox="0 0 24 24">
+    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+  </svg>`;
+
+  let html = `
+  <div class="meta">
+    <span>${escapeHtml(post.type || "Text")}</span>
+    <div class="meta-right">
+      <span class="views-badge">
+        ${eyeIcon}
+        <span class="view-count">${viewCount}</span>
+      </span>
+      <span>${time}</span>
+    </div>
+  </div>`;
+
+  if(post.title){
+    html += `<div class="title">${escapeHtml(post.title)}</div>`;
+  }
+
+  if(post.type === "Link" && post.url){
+
+    html += `
+      <div class="content">${escapeHtml(post.content || "")}</div>
+      <a href="${escapeHtml(post.url)}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="link-btn">
+         🔗 Open Link: ${escapeHtml(post.url)}
+      </a>`;
+
+  }
+  else if(post.type === "Prompt"){
+
     html += `
       <div class="code-container">
+
         <div class="code-header">
           <span>Prompt Code</span>
-          <button class="copy-code-btn" data-prompt="${escapeHtml(post.content || "")}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+
+          <button class="copy-code-btn" type="button">
             Copy
           </button>
         </div>
+
         <div class="code-content">${escapeHtml(post.content || "")}</div>
-      </div>
-    `;
-  } 
-  // Normal Text
-  else {
+
+      </div>`;
+
+  }
+  else{
+
     html += `<div class="content">${escapeHtml(post.content || "")}</div>`;
+
   }
 
-  if (post.imageUrl) html += `<img src="${escapeHtml(post.imageUrl)}" alt="Post image" loading="lazy">`;
-  
-  // Main Copy Prompt button (agar Prompt hai toh)
-  if (post.type === "Prompt") {
-    html += `<button class="copy-main-btn" data-prompt="${escapeHtml(post.content || "")}">📋 Copy Prompt</button>`;
+  if(post.imageUrl){
+    html += `<img src="${escapeHtml(post.imageUrl)}" alt="Post image" loading="lazy">`;
   }
-  
+
   div.innerHTML = html;
 
-  // Copy Button Logic
-  const copyBtns = div.querySelectorAll("[data-prompt]");
-  copyBtns.forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const text = btn.dataset.prompt;
-      try {
+  // Copy button
+  const copyBtn = div.querySelector(".copy-code-btn");
+
+  if(copyBtn){
+
+    copyBtn.addEventListener("click",async(e)=>{
+
+      e.stopPropagation();
+
+      const text = post.content || "";
+
+      try{
+
         await navigator.clipboard.writeText(text);
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = "✅ Copied!";
-        btn.classList.add("copied");
-        setTimeout(() => { 
-          btn.innerHTML = originalHTML; 
-          btn.classList.remove("copied"); 
-        }, 2000);
-      } catch (e) {
-        const ta = document.createElement("textarea"); ta.value = text;
-        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+
+      }catch(error){
+
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+
       }
+
+      const originalText = copyBtn.innerText;
+
+      copyBtn.innerText = "Copied!";
+      copyBtn.classList.add("copied");
+
+      setTimeout(()=>{
+        copyBtn.innerText = originalText;
+        copyBtn.classList.remove("copied");
+      },2000);
+
     });
-  });
+
+  }
 
   return div;
 }
 
-function escapeHtml(str) {
-  if (!str) return "";
-  return str.replace(/[&<>"']/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[m]));
+// HTML security
+function escapeHtml(str){
+
+  if(!str) return "";
+
+  return String(str).replace(/[&<>"']/g,(m)=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[m]));
+
 }
+
 </script>
+
 </body>
 </html>
